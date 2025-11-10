@@ -1,0 +1,49 @@
+<div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="z-50 bg-white shadow-lg w-64 transition-transform duration-300" 
+    [ngClass]="{
+      'fixed inset-y-0 left-0 h-full': !isDesktop,
+      'translate-x-0': sidebarOpen,
+      '-translate-x-full': !sidebarOpen
+    }">
+        <app-sidebar [sidebarOpen]="sidebarOpen" (sidebarToggle)="setSidebarOpen($event)"></app-sidebar>
+    </aside>
+
+    <!-- Backdrop -->
+    <div *ngIf="!isDesktop && sidebarOpen" class="fixed inset-0 bg-black/40 z-40" (click)="sidebarOpen = false"></div>
+
+    <!-- Main content -->
+    <div class="flex-1">
+        <div class="p-4 bg-white shadow-sm flex items-center justify-between">
+            <heading title="Dashboard"></heading>
+            <button class="lg:hidden px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                (click)="sidebarOpen = !sidebarOpen">☰</button>
+        </div>
+
+        <div class="bg-gray-200 min-h-[calc(100vh-65px)] p-5">
+            <div class="grid lg:grid-cols-2 gap-5">
+                <!-- Users and Brands Cards -->
+                <div class="grid lg:grid-cols-2 gap-5">
+                    <div class="bg-white text-center p-5 rounded shadow">
+                        <h2 class="text-3xl font-semibold">No of Users</h2>
+                        <h1 class="text-6xl my-3">7</h1>
+                        <a routerLink="/users" class="text-blue-500 text-lg">View All Users</a>
+                    </div>
+
+                    <div class="bg-white text-center p-5 rounded shadow">
+                        <h2 class="text-3xl font-semibold">No of Brands</h2>
+                        <h1 class="text-6xl my-3">7</h1>
+                        <a routerLink="/brands" class="text-blue-500 text-lg">View All Brands</a>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="bg-white shadow p-5 rounded">
+                    <h2 class="text-2xl font-semibold mb-3">No of Sales</h2>
+                    <!-- <canvas baseChart [data]="barChartData" [options]="barChartOptions" chartType="bar"></canvas> -->
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

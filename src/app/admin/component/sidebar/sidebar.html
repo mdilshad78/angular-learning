@@ -1,0 +1,24 @@
+<div class="h-full flex flex-col bg-white shadow-md">
+    <div class="p-4 border-b flex justify-between items-center">
+        <h2 class="text-lg font-bold">Menu</h2>
+        <button class="lg:hidden text-gray-600 hover:text-black" (click)="closeSidebar()">
+            ✕
+        </button>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto">
+        <a *ngFor="let item of menuItems" [routerLink]="item.link" routerLinkActive="bg-blue-100 text-blue-700"
+            class="w-full flex items-center px-6 py-3 hover:bg-gray-100 transition text-gray-700">
+            <fa-icon [icon]="item.icon" class="mr-3"></fa-icon>
+            {{ item.name }}
+        </a>
+    </nav>
+
+    <div>
+        <a (click)="handleLogout()"
+            class="w-full flex items-center px-6 py-3 hover:bg-gray-100 text-gray-700 transition cursor-pointer">
+            <fa-icon [icon]="faSignOutAlt" class="mr-3"></fa-icon>
+            Log Out
+        </a>
+    </div>
+</div>

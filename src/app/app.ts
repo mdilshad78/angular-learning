@@ -1,12 +1,36 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { Navbar } from "./user/component/navbar/navbar";
+import { filter } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [Navbar, RouterOutlet, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('angular-first');
+  showNavbar = true;
+  showSidebar = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const url = event.urlAfterRedirects;
+
+        // ✅ Show sidebar for admin routes
+        if (url.startsWith('/admin')) {
+          this.showSidebar = true;
+          this.showNavbar = false;
+        }
+        // ✅ Show navbar for user routes
+        else {
+          this.showSidebar = false;
+          this.showNavbar = true;
+        }
+      }
+    });
+  }
 }
