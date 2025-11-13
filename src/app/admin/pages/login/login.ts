@@ -4,6 +4,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -24,12 +25,12 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 export class Login {
+  error: string = '';
+  success: string = '';
   email: string = '';
   password: string = '';
   showPassword: boolean = false;
   loading: boolean = false;
-  success: string = '';
-  error: string = '';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -38,26 +39,41 @@ export class Login {
     this.success = '';
 
     if (!this.email || !this.password) {
-      this.error = '⚠️ Please fill all fields';
+      this.error = 'Please fill all feilds';
       return;
     }
 
     this.loading = true;
+
     try {
-      const result: any = await this.http
-        .post('https://oopss-by-shreeenterprises-backend.onrender.com/api/admin/login', {
+      const result: any = await firstValueFrom(
+        this.http.post('http://localhost:5000/api/auth/admin/login', {
           email: this.email,
           password: this.password,
         })
-        .toPromise();
+      );
 
-      sessionStorage.setItem('token', result.token);
+      console.log('API Response:', result)
+
+      // const token = result.token
+      // if (token) {
+      //   sessionStorage.setItem('token', token);
+      //   console.log('API Token:', token);
+      //   
+      // }
+      // else {
+      //   console.error('No token found in response');
+      //   this.error = '❌ Login failed: token not found';
+      // }
+
       this.success = '✅ Login Successful!';
       this.router.navigate(['admin/dashboard']);
-    } catch (err) {
+    }
+    catch (err) {
       this.error = '❌ Invalid login credentials';
-    } finally {
-      this.loading = false;
+    }
+    finally {
+      this.loading = false
     }
   }
 }
