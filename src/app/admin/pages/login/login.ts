@@ -55,19 +55,19 @@ export class Login {
 
       console.log('API Response:', result)
 
-      // const token = result.token
-      // if (token) {
-      //   sessionStorage.setItem('token', token);
-      //   console.log('API Token:', token);
-      //   
-      // }
-      // else {
-      //   console.error('No token found in response');
-      //   this.error = '❌ Login failed: token not found';
-      // }
+      const token = result.token
+      if (token) {
+        sessionStorage.setItem('token', token);
+        console.log('API Token:', token);
+        this.success = '✅ Login Successful!';
+        this.router.navigate(['admin/dashboard']);
+      }
+      else {
+        console.error('No token found in response');
+        this.error = '❌ Login failed: token not found';
+      }
 
-      this.success = '✅ Login Successful!';
-      this.router.navigate(['admin/dashboard']);
+
     }
     catch (err) {
       this.error = '❌ Invalid login credentials';

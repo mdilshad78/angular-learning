@@ -21,7 +21,7 @@ export class App {
         const url = event.urlAfterRedirects;
 
         // ✅ Show sidebar for admin routes
-        if (url.startsWith('/admin')) {
+        if (url.startsWith('/admin') || url.startsWith("/login") || url.startsWith("/register")) {
           this.showSidebar = true;
           this.showNavbar = false;
         }

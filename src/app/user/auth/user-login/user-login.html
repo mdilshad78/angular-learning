@@ -1,0 +1,70 @@
+<div
+    class="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-purple-100 font-[Poppins]">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 text-center transition-all duration-700 transform">
+
+        <!-- Title -->
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+            Welcome Back
+        </h2>
+        <p class="text-gray-500 text-sm mb-6">
+            Sign in with your email and password
+        </p>
+
+        <!-- Alerts -->
+        <p *ngIf="error" class="text-red-500 font-medium mb-3">{{ error }}</p>
+        <p *ngIf="success" class="text-green-600 font-medium mb-3">{{ success }}</p>
+
+        <!-- Form -->
+        <form (ngSubmit)="submit()" class="space-y-5">
+            <!-- Email -->
+            <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                    <i class="fa fa-envelope"></i>
+                </span>
+                <input type="email" placeholder="Email"
+                    class="w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    [(ngModel)]="email" name="email" required />
+            </div>
+
+            <!-- Password -->
+            <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                    <i class="fa fa-lock"></i>
+                </span>
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="Password"
+                    class="w-full pl-10 pr-10 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    [(ngModel)]="password" name="password" required />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700"
+                    (click)="showPassword = !showPassword">
+                    <i *ngIf="showPassword" class="fa fa-eye"></i>
+                    <i *ngIf="!showPassword" class="fa fa-eye-slash"></i>
+                </span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" [disabled]="loading"
+                class="w-full mt-2 py-3 rounded-lg font-semibold transition transform shadow-md flex items-center justify-center text-white bg-blue-600 hover:bg-blue-700 hover:scale-[1.02]"
+                [ngClass]="{
+          'bg-gray-400 cursor-not-allowed': loading,
+          'bg-blue-600 hover:bg-blue-700': !loading
+        }">
+                <ng-container *ngIf="loading; else normalButton">
+                    <div class="flex items-center justify-center space-x-2">
+                        <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Logging in...</span>
+                    </div>
+                </ng-container>
+
+                <ng-template #normalButton>
+                    <span class="font-semibold text-white">Login</span>
+                </ng-template>
+            </button>
+
+            <div class="grid grid-cols-2 text-sm">
+                <a href="" class="text-blue-600 hover:underline text-start">Forget Password</a>
+                <a href="/register" class="text-blue-600 hover:underline text-end">You have't register. Please register</a>
+            </div>
+
+        </form>
+    </div>
+</div>
