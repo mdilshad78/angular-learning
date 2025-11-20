@@ -52,7 +52,7 @@ export class UserRegister {
 
     try {
       const result: any = await firstValueFrom(
-        this.http.post('http://localhost:5000/api/auth/user/register', this.formData)
+        this.http.post('http://angular-backend-ten.vercel.app/api/auth/user/register', this.formData)
       );
       console.log("Api", result);
       this.success = "Register Successfully!";
