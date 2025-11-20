@@ -34,6 +34,8 @@ export class Login {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  
+
   async submit() {
     this.error = '';
     this.success = '';
@@ -60,7 +62,7 @@ export class Login {
         sessionStorage.setItem('token', token);
         console.log('API Token:', token);
         this.success = '✅ Login Successful!';
-        this.router.navigate(['admin/dashboard']);
+        this.router.navigate(['/admin/dashboard']);
       }
       else {
         console.error('No token found in response');

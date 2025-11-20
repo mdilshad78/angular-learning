@@ -3,11 +3,12 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Navbar } from "./user/component/navbar/navbar";
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Navbar, RouterOutlet, CommonModule],
+  imports: [Navbar, RouterOutlet, CommonModule, HttpClientModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

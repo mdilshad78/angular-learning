@@ -1,7 +1,39 @@
-<div class="">
-    <app-heading title="Home"></app-heading>
-    <div class="mt-6">
-        <app-heading name="Dilshad"></app-heading>
+<div class="" *ngIf="isLogging; else notLogged">
+    <app-heading title="All User Data"></app-heading>
 
+    <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-300 text-left">
+
+            <thead class="bg-gray-100 text-center">
+                <tr>
+                    <th class="px-4 py-2 border">#</th>
+                    <th class="px-4 py-2 border">Username</th>
+                    <th class="px-4 py-2 border">Email</th>
+                    <th class="px-4 py-2 border">Phone Number</th>
+                    <th class="px-4 py-2 border">Delete</th>
+                    <th class="px-4 py-2 border">Update</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let user of users; let i = index" class="hover:bg-gray-50 text-center">
+                    <td class="px-4 py-2 border">{{ i + 1 }}</td>
+                    <td class="px-4 py-2 border">{{ user.username }}</td>
+                    <td class="px-4 py-2 border">{{ user.email }}</td>
+                    <td class="px-4 py-2 border">{{ user.phoneNumber }}</td>
+                    <td class="px-4 py-2 border">
+                        <button class="px-3 py-1 bg-blue-600 text-white rounded-sm text-xs sm:text-sm"
+                            (click)="deleteUser(user._id)">Delete</button>
+                    </td>
+                    <td class="px-4 py-2 border">
+                        <button class="px-3 py-1 bg-red-600 text-white rounded-sm text-xs sm:text-sm">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<ng-template #notLogged>
+    <p class="text-red-600 text-center text-lg mt-10">You must log in to see user data.</p>
+</ng-template>

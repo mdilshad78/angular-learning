@@ -42,10 +42,19 @@ export class UserLogin {
       );
 
       console.log("Api result", result)
+      console.log("Api result", result.user?._id)
       const token = result.token;
-      if (token) {
+      const userId = result.user?._id;
+
+
+      if (token && userId) {
         sessionStorage.setItem("token", token);
+        sessionStorage.setItem("userId", userId);
+
+        sessionStorage.setItem("user", JSON.stringify(result.user));
+
         console.log("Api token", token);
+
         this.success = "successfully login";
         this.router.navigate(['/'])
       }
@@ -55,7 +64,7 @@ export class UserLogin {
       }
     }
     catch (err) {
-      this.error = '❌ Invalid login credentials';
+      this.error = '❌ Not Data Found. Please Register first!';
     }
     finally {
       this.loading = false
