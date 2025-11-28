@@ -49,7 +49,7 @@ export class ProfileEdit {
     };
 
     this.http.put(
-      `http://localhost:5000/api/auth/user/profile/${this.userId}`,
+      `https://angular-backend-ten.vercel.app/api/auth/user/profile/${this.userId}`,
       this.form,
       { headers }
     )
