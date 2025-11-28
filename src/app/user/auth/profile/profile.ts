@@ -21,7 +21,7 @@ export class Profile {
     const userId = sessionStorage.getItem("userId");
     const token = sessionStorage.getItem("token");
 
-    console.log("SESSION USER ID:", userId);
+    // console.log("SESSION USER ID:", userId);
 
     if (!token) {
       this.router.navigate(['']);
@@ -36,7 +36,7 @@ export class Profile {
     ).subscribe({
       next: (res: any) => {
         this.user = res.user;
-        console.log("Profile", this.user);
+        // console.log("Profile", this.user);
       },
       error: (err) => {
         console.error("Profile Load Error:", err);
