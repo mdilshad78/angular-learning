@@ -25,7 +25,7 @@ export class Home {
       return
     }
 
-    this.http.get('http://localhost:5000/api/auth/user/userdata').subscribe((res: any) => {
+    this.http.get('https://angular-backend-ten.vercel.app/api/auth/user/userdata').subscribe((res: any) => {
       this.users = res.result;
       console.log("API Data:", this.users)
     })
