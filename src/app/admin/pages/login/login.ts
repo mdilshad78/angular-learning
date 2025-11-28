@@ -49,7 +49,7 @@ export class Login {
 
     try {
       const result: any = await firstValueFrom(
-        this.http.post('http://localhost:5000/api/auth/admin/login', {
+        this.http.post('https://angular-backend-ten.vercel.app/api/auth/admin/login', {
           email: this.email,
           password: this.password,
         })

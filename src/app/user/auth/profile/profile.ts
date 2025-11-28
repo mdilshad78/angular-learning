@@ -29,7 +29,7 @@ export class Profile {
     }
 
     this.http.get(
-      `http://localhost:5000/api/auth/user/me/${userId}`,   // <-- FIXED
+      `https://angular-backend-ten.vercel.app/api/auth/user/me/${userId}`,   // <-- FIXED
       {
         headers: { Authorization: "Bearer " + token }
       }
